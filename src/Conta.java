@@ -1,5 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
 
-public abstract class Conta implements IConta {
+public class Conta implements IConta {
 	
 	private static final int AGENCIA_PADRAO = 1;
 	private static int SEQUENCIAL = 1;
@@ -8,6 +10,7 @@ public abstract class Conta implements IConta {
 	protected int numero;
 	protected double saldo;
 	protected Cliente cliente;
+	protected List<Double> extrato = new ArrayList<>();
 
 	public Conta(Cliente cliente) {
 		this.agencia = Conta.AGENCIA_PADRAO;
@@ -18,17 +21,34 @@ public abstract class Conta implements IConta {
 	@Override
 	public void sacar(double valor) {
 		saldo -= valor;
+		extrato.add(-valor);
 	}
 
 	@Override
 	public void depositar(double valor) {
 		saldo += valor;
+		extrato.add(valor);
 	}
 
 	@Override
 	public void transferir(double valor, IConta contaDestino) {
 		sacar(valor);
+		extrato.add(-valor);
 		contaDestino.depositar(valor);
+	}
+
+	@Override
+	public String toString() {
+		return "Transferencias = " + extrato;
+	}
+
+	@Override
+	public void imprimirExtrato() {
+	}
+
+	@Override
+	public List<Double> imprimirTransferencias() {
+		return extrato;
 	}
 
 	public int getAgencia() {

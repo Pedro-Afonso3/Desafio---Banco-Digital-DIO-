@@ -1,23 +1,32 @@
+import java.util.ArrayList;
 import java.util.List;
 
-public class Banco {
+public class Banco extends Conta{
 
-	private String nome;
-	private List<Conta> contas;
+	private List<String> nome = new ArrayList<>();
+	private Conta contas;
 
-	public String getNome() {
+	public Banco(Cliente cliente) {
+		super(cliente);
+	}
+
+	public void adicionarBanco(String nomeBanco){
+		nome.add(nomeBanco);
+	}
+
+	public List<String> getNome() {
 		return nome;
 	}
 
-	public void setNome(String nome) {
+	public void setNome(List<String> nome) {
 		this.nome = nome;
 	}
 
-	public List<Conta> getContas() {
+	public Conta getContas() {
 		return contas;
 	}
 
-	public void setContas(List<Conta> contas) {
+	public void setContas(Conta contas) {
 		this.contas = contas;
 	}
 

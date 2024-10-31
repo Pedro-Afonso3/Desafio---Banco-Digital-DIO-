@@ -1,3 +1,4 @@
+import java.util.List;
 
 public interface IConta {
 	
@@ -8,4 +9,6 @@ public interface IConta {
 	void transferir(double valor, IConta contaDestino);
 	
 	void imprimirExtrato();
+
+	List<Double> imprimirTransferencias();
 }
